@@ -1,0 +1,143 @@
+Djano is a tool used in Python to create web applications
+
+Django is made up of Apps, which store different parts of the website
+
+Apps usually contain the following information:
+- Models
+- Views
+- Templates
+- URLs
+
+You let Django know about all the apps in your website by declaring them in your Apps settings file
+
+Views are what Django produces when a user searches the website
+Views can be used ass classes, which are called class based Views
+
+The main difference between class based and function based views are how they extended logic
+
+Most documentation is written using function based views - LEARN THESE
+
+We create paths to tell Django which view to use when a person searches a specific website
+
+A solid understanding of the standard Django templating format is important
+
+Models are class based representations of our database tables
+
+A model class will represent a table, and an object will represent a column
+
+You will also need to know how to use Djangos built in ORM
+
+Learn about CRUD operatiopns (Create, Read, Update, Delete)
+
+Static files are a big part of Django as they help format the website visually.
+This could include the following:
+- Styles: CSS files
+- JS: Javascript files
+- Images: Display or user uploaded Images
+
+5 Most Comman Commands:
+- startproject
+- startapp
+- makemigrations
+- migrate
+- createsuperuser
+
+Signals are powerful for when listening to events that may happen. It can then
+fire off an action 
+
+Django provides us with an SQLite database
+
+Every Django beginner should be able to deploy their application (AWS)
+
+Django gives us alot of premade functionality
+- Admin Site 
+- ORM
+- Authentication
+- Caching
+
+How to web works
+- Front end 
+- Back end 
+- URL: Uniform Resource Locator
+- HTTP: Hyper Text Transfer Protocol, defines how clients and servers communicate
+- HTML: Hyper Text Markup Language: How a website is formatted, generates website
+- If we push the responsibility for generating the website on the client, the server can handle more users
+- THe server provides an API: Application Programming Interface
+- Django is a server side application (back end)
+
+Creating a Virtual Environment:
+
+When creating Django projects you need to create a virtual Environment
+This ensures there are no clashing dependancies between projects
+They keep your project isolated.
+Allows the computer to have multiple versions of Django and Python installed on the machine without them clashing with eachother
+
+So if you switch between packages, libraries or versions it does not affect other projects because you are only making the changes
+within the given virtual Environment
+
+For example, if you are working on an open source project that uses django 1.5, but you have django 1.9 installed, you will get loads
+of errors when you try and run the code. And if you try to downgrade to django 1.5, then it may work but all your other projects that
+were built using django 1.9 will now no longer work.
+
+Creating a virtual environment allows isolation of dependancies, enabling the installation and management of project specific requirements
+without impacting the global python or Django installation on your machine. Using a virtual env gives you complete control of the packages
+and tools used for a given project and makes sure that they do not clash with other projects
+
+You essentially download a local installation of Python and Django within the virtual environment that no longer interferes with anything
+outside of that environement
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Django project - Django REST framework: Caleb Curry
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+manage.py is a wrapper around the django admin that does a little extra setup
+
+"manage.py migrate" migrates the data structure for the databases. It creates the databases
+
+Django has an admin page that lets you see the tables and the data inside of the tables
+
+This is handy when building an API as you can check everything is working
+
+'''''''''''''''''''''''''''''''''''''''''''''
+     Creating Admin Username and Password
+'''''''''''''''''''''''''''''''''''''''''''''
+
+We create an admin for Django by creating a 'super user'
+
+This is done using the following terminal command: "python manage.py createsuperuser"
+
+To add our own users to the application we need to create a model.
+
+Create a models.py file within the project folder 'mysite'. This is where you can define the classes
+for different models, e.g. drink name and description, so that coloumns can be created within the 
+database for this data
+
+We then want to migrate the model
+
+We need to add the app 'mysite' we have made into the Django settings so it can see it
+
+A migration in Django is a way of applying and tracking changes to your database schema.
+Think of migrations as the Git for your database structure.
+It essentially tracks the changes, ensures they are safe, and then commits them to the database
+
+When you create a migration, Django will create a migrations folder, that will create a new .py file every time a migration is made.
+Inside these py files will detail the changes made to the database during that migration
+
+Even if we declare a migration using 'makemigrations', this only documents/tracks the changes.
+To actually apply these changes we need to then use 'manage.py migrate' again.
+
+We also need to create an admin file within our project 'mysite'
+You dont need to use the default Django admin site if you don't want to
+
+If we want to create a REST API, we also need to add 'rest_framework' to the Django INSTALLED_APPS list in settings.py
+
+We then need to make 'serializers.py' which will convert the python object into JSON 
+
+We also need to create an endpoint for the API. Destination for data 
+
+We need to say what URL will hit this view. What HTTP address will trigger this webpage to be displayed.
+To do this we need to create a PATH
+
+We now have a working API with Django that retrieves data from a database and displays it on a website. For this application it is drinks and list of drinks
+
+TIMESTAMP: 
