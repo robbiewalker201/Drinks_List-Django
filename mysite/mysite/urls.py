@@ -24,5 +24,7 @@ urlpatterns = [
     # Path for Django Admin site
     path('admin/', admin.site.urls),
     # Path for drinks site - mysite
-    path('mysite/', views.drink_list)
+    path('mysite/', views.drink_list),
+    # Path for page to display drink detials
+    path('mysite/<int:id>', views.drink_detail)
 ]

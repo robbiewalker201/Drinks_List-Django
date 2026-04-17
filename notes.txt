@@ -140,4 +140,75 @@ To do this we need to create a PATH
 
 We now have a working API with Django that retrieves data from a database and displays it on a website. For this application it is drinks and list of drinks
 
-TIMESTAMP: 
+'''
+Swtiching to a Virtual Environment - Terminal prompt: "venv\Scripts\activate"
+'''
+
+The other API requests we will be using are PUT, POST and Delete
+
+
+'''
+What is the rest framework?
+'''
+- The REST api framework is a Django python toolkit designed to build web APIs on top of Django.
+- It is known as the Django Rest Framework (DRF)
+
+Part of the DRF is the 'request' object. This wraps Django HttpRequest and adds request.data, automates JSON parsing and authenticates hooks
+Hooks are the behaviour and flow of an API request. Without this alot of the python data would need manual parsing to JSON
+
+DrinkSerializer is a Django seriliazer class that serializes models which are objects that go within the database
+Serialization is needed because Django works with internal data that is not compatible with the outside world (HTTP/JSON)
+
+Django works with model instances, query sets (multiple objects), and Python objects
+Outside of Django the client (browser) uses JSON, Dictionaries, Lists etc 
+
+JSON does not understand models, foreign keys, meta data etc that come with Django query sets from an SQL database
+
+'''
+What 'serializer = DrinkSerializer(drinks, many=True)' actually does?
+'''
+
+- States which model fields are allowed to leave the server, which columns in the database are we alloweed to use
+- Converts the data from model fields to plain python, JSON compatible and safe to send over HTTP 
+- We also need it to deserialize data from JSON->Python and then from Python->Django model fields
+
+Database -> Django Model Fields -> Serializer -> Plain Python -> JSON -> Client (webserver) -> JSON -> Plain Python -> Serialzier -> Django Model Fields -> Database
+
+Serilaizers are essential in APIs because the offer:
+- Security
+- Validation of data
+- Explicit API contracts
+- Control over exposed data
+- Correct JSON output
+- Bidirectional conversion (GET/POST)
+
+A Django model is ' A python class that defines the structure and behaviour of data that is stored as rows in a database table'
+It describes how a data entry in SQL in structured within its table.
+This is written as a class in Python
+Saving using .save() is what bridges Python to SQL Database
+
+Django 
+- Drink = drink table
+- Instance of Drink = row in table
+- Model field = table coloumn
+- id field = primary key
+
+The functionality of how to execute SQL Queries using Django comes from Djangos ORM - Object Rleational Mapper
+When using objects.all() you are returning a 'QuerySet' of drink object in python, where each object represents a row in the database table
+
+Without Django ORM you would have to
+- Write SQL manually
+- Convert database rows into python objects
+- Validate the data inputs yourself
+- Keep python data up to date with database schema
+- Handle migrations (executing queries) manually
+
+Database Table -> Django ORM -> Django Model -> Python code
+
+The Django model defines how the python data will be formatted hence, the schema for the database the SQL executions will be based on
+It is important that when you change a model you migrate the changes, or the python data/Django models will be out of sync with the database schema
+
+POSTMAN - Post is a too for API builders for testing APIs
+
+When doing a POST request you do not need to include the 'id' in your JSON object, this should be done automatically and it will read the id's from the other objects to know which is next
+
