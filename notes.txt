@@ -212,3 +212,6 @@ POSTMAN - Post is a too for API builders for testing APIs
 
 When doing a POST request you do not need to include the 'id' in your JSON object, this should be done automatically and it will read the id's from the other objects to know which is next
 
+The difference between JsonResponse and Response is the formatting of the webapge. JsonResponse displays the data as raw JSON, but Response is a Django module and formats it 
+in user readable way, similar to the Django admin page
+

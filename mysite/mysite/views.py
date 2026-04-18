@@ -21,7 +21,9 @@ from rest_framework import status
 @api_view(['GET', 'POST'])
 # This function is an API endpoint
 # 'request' is a DRF Request object
-def drink_list(request):
+# add format=None as part of the urlpattern variable that allows you to search the url
+# with .json at the end, incase you want raw JSON instead of Djangos standard HTTP view
+def drink_list(request, format=None):
 
     # Handles getting an existing drink
     if request.method == 'GET':
@@ -33,7 +35,7 @@ def drink_list(request):
         serializer = DrinkSerializer(drinks, many=True)
         # return JSON - sets content type to application/json
         # Django only allows dictionaries, since this is a list, SAFE must be false
-        return JsonResponse(serializer.data, safe=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
     # Handles creating a new drink
     # Content-type application/json - POST /drinks/
@@ -51,7 +53,7 @@ def drink_list(request):
 # HTTP address for specific information about the drinks
 @api_view(['GET', 'PUT', 'DELETE'])
 # Need to pass id as argument for drink we want data for
-def drink_detail(request, id):
+def drink_detail(request, id, format=None):
 
     try:
         # Get an object Drink (row in database) based on primary key id
@@ -68,9 +70,23 @@ def drink_detail(request, id):
         # Return JSON formatted data, HTTP 200 for successful GET request
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    elif request.method == 'POST':
-        pass
+    # if PUT request (update data)
+    elif request.method == 'PUT':
+        # Serializer the objects in request 
+        serializer = DrinkSerializer(drink, data=request.data)
+        # If data being updated exists
+        if serializer.is_valid():
+            # save updated data to database
+            serializer.save()
+            # return JSON formatted data to website
+            return Response(serializer.data)
+        # if data does not exist throw HTTP_400 error
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+    # if request API type is DELETE
     elif request.method == 'DELETE':
-        pass
+        # Delete element from database
+        drink.delete()
+        # return no content error if we try to GET data
+        return Response(status=status.HTTP_204_NO_CONTENT)

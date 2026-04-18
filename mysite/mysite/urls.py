@@ -19,6 +19,7 @@ from django.urls import path
 
 # Import new path for drinks - use project 
 from mysite import views
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     # Path for Django Admin site
@@ -27,4 +28,11 @@ urlpatterns = [
     path('mysite/', views.drink_list),
     # Path for page to display drink detials
     path('mysite/<int:id>', views.drink_detail)
+   
 ]
+
+    # We can use a function called 'format_suffix_patterns(urlpatterns)' to be able to create the same url's
+    # but for different data types, so if we are using Return() but only want to display the raw JSON
+    # we can use this functon
+
+urlpatterns= format_suffix_patterns(urlpatterns)
